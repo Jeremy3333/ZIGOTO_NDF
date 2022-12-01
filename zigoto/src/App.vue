@@ -1,14 +1,17 @@
 <template>
   <HeaderVue></HeaderVue>
+  <NavVue></NavVue>
 </template>
 
 <script>
 import HeaderVue from './components/HeaderVue.vue'
+import NavVue from './components/NavVue.vue'
 
 export default {
   name: 'App',
   components: {
-    HeaderVue
+    HeaderVue,
+    NavVue
   }
 }
 </script>
