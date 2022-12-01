@@ -1,5 +1,5 @@
 <template>
     <header>
-        <h1>titre</h1>
+        <h1>IST en folie</h1>
     </header>
 </template>
