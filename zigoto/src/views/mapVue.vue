@@ -1,17 +1,7 @@
 <template>
     <div class="accueil">
         <headerVue class="header"/>
-        <div class="wrapper">
-            <div class="box btn-1"> <h2>La sensibilisation : le jeux !</h2> <img class="next" :src="require('../assets/img/next.svg')" alt=""> </div>
-            <div class="box btn-2"> <h2>Où se dépister ? Se protéger ?</h2> <img class="next" :src="require('../assets/img/next.svg')" alt=""></div>
-            <div class="box btn-3"> <h2>La sensibilisation façon jeune</h2> <img class="next" :src="require('../assets/img/next.svg')" alt=""></div>
-            <div class="box last_box">
-
-            </div>
-
-            <img class="loupe" :src="require('../assets/img/loupe.png')" alt="">
-            <img class="ribon" :src="require('../assets/img/ribon.png')" alt="">
-        </div>
+        CE LA MAP
     </div>
 </template>
 
@@ -53,7 +43,6 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
 }
 
 .box:hover{
