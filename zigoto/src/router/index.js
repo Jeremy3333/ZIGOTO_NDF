@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import accueilVue from '../views/accueilVue.vue'
 import maucheVue from '../views/maucheVue.vue'
+import gameVue from '../views/gameVue.vue'
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: '/mauche',
     name: 'mauche',
     component: maucheVue
+  },
+  {
+    path: '/game',
+    name: 'game',
+    component: gameVue
   }
 ]
 
