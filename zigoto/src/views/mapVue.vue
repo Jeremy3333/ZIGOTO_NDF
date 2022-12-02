@@ -1,86 +1,56 @@
 <template>
-    <div class="accueil">
-        <headerVue class="header"/>
-        CE LA MAP
+  <div class="map">
+    <Map  :center="center" :zoom="zoom" ref="map" />
+    <div style="width: 100%;display: flex;">
+      <button v-on:click="setCenter()">localisation</button>
     </div>
+    <NavBar/>
+  </div>
 </template>
 
 <script>
-import headerVue from '../components/headerVue.vue'
+import Map from '@/components/mapCompVue.vue'
 
 export default {
-    name: 'accueilVue',
-    components: {
-        headerVue
+  name: 'mapVue',
+  components: {
+    Map
+  },
+  data() {
+    return {
+      center : { lat: 46.776439,lng:2.419556},
+      zoom:6,
+    };
+  },
+  mounted() {
+  },
+  methods:{
+    async setCenter(){
+      if (navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(position =>{
+          let center = {lat:position.coords.latitude,lng:position.coords.longitude}
+          let zoom = 15
+          this.$refs.map.setCenter(center,zoom)
+        })
+      }
     }
+  }
 }
 </script>
 
 <style scoped>
-.wrapper{
-    z-index: 0;
-    height: calc(100vh - 100px);
-    display: flex;
-    flex-direction: column;
-    background: #9FEFD9;
-    width: 100vw;
-    align-items: center;
+.map {
+  height: calc(100vh - 100px);
+  width: 100%;
 }
-.header{
-    z-index: 1;
-    position: relative;
-}
-.box{
-    width: 75%;
-    color: rgb(75, 75, 75);
-    text-align:center;
-    border: 1px solid white;
-    border-radius: 15px;
-    margin: 1% 0;
-    height: 5vh;
-    background: rgba(255, 255, 255, 0.25);
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.box:hover{
-    background: #FA97CD;
-    border:none!important;
-    margin:calc(1% + 1px) 0
-}
-
-
-.last_box{
-    border: 1px solid white;
-    border-radius: 15px;
-    height: 45vh;
-}
-
-.loupe{
-    position: absolute;
-    z-index: 0;
-    right:0%;
-    bottom:0%
-}
-.ribon{
-    transform: scaleX(-1);
-    position: absolute;
-    z-index: 0;
-    left:-5%;
-    top:0%
-}
-.next{
-    position:absolute;
-    margin-left: 60vw;
-    width: 3vw;
-    height: auto;
-    transition-duration: 500ms ;
-}
-
-.box:hover .next{
-    transform: translate(2.5vw);
-    
+button{
+  height:90px;
+  width: 90px;
+  border:none;
+  border-radius:100%;
+  background: #009EC2;
+  cursor: pointer;
+  margin:auto;
+  margin-top:-2.5%
 }
 </style>
