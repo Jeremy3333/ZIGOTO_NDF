@@ -1,5 +1,14 @@
 <template>
     <div class="game">
+        <div class="alertWrap" v-if="alert">
+            <div class="alert">
+                <h3>Le saviez vous?</h3>
+                <p>{{ event[fun_fact_counter - 1].fun_fact }}</p>
+                <div class="button" v-on:click="(alert = false)">
+                    <p>ok</p>
+                </div>
+            </div>
+        </div>
         <headerVue />
         <div class="main">
             <div class="center_section">
@@ -89,8 +98,46 @@ export default {
             cout_school: 100,
             lvl_vidAd: 1,
             cout_vidAd: 500,
-            timer: null
+            timer: null,
+            fun_fact_counter: 0,
+            alert: false,
+            event: [
+                {
+                    value: 10,
+                    fun_fact: "Le TPE est un Traitement-Post-Exposition qui permet d'empêcher une contamination lorsqu'on a été exposé au VIH. Il se compose de plusieurs médicaments actifs contre le VIH et il doit être pris pendant 28 jours. Pour que son efficacité soit la meilleure possible, il faut le débuter immédiatement, de préférence moins de 4 heures après le risque et au plus tard dans les 48 heures, après un risque de transmission du VIH."
+                },
+                {
+                    value: 50,
+                    fun_fact: "pour faire un dépistage du SIDA il faut attendre un délai de 3 mois après la dernière prise de risque"
+                },
+                {
+                    value: 100,
+                    fun_fact: "Il n'y a pas de risque VIH quand on se fait faire une fellation mais il peut y en avoir si on fait une fellation à un homme qui a le VIH si sa charge virale n'est pas indétectable."
+                },
+                {
+                    value: 500,
+                    fun_fact: "symptômes semblables à ceux de la grippe : fièvre, maux de tête ou de gorge, douleurs musculaires ou articulaires, ganglions enflés au cou, aux aisselles ou à l'aine, ulcères dans la bouche, etc..."
+                },
+                {
+                    value: 1000,
+                    fun_fact: "Pour réaliser un test de dépistages du VIH, des IST et des hépatites, il est possible de se rendre dans un CeGIDD (Centre Gratuit d’Information, de Dépistage et de Diagnostic), mais aussi en laboratoire avec l'ordonnance d'un médecin, en pharmacie via un autotest ou par le biais d'un programme communautaire de dépistage."
+                },
+                {
+                    value: 5000,
+                    fun_fact: "Transmission par voie sexuelle Le risque de contamination est faible au cours d'une pénétration vaginale, car la transmission du VIH n'est pas très fréquente dans ce cas.Les études montrent que le taux de transmission au cours d'un rapport sexuel anal est 10 fois plus élevé que pour une pénétration vaginale."
+                },
+                {
+                    value: 10000,
+                    fun_fact: "Bravo vous avez fini le jeu"
+                }
+            ]
         }
+    },
+    mounted: function () {
+        this.timer = setInterval(() => {
+            this.sensib += (this.sensib_auto / 10);
+            this.checkFunFact()
+        }, 100)
     },
     methods: {
         eloquence_lvlUp() {
@@ -141,14 +188,17 @@ export default {
                 this.sensib_auto += this.lvl_vidAd * 100;
             }
         },
+        checkFunFact() {
+            if (!(this.event.length <= this.fun_fact_counter)) {
+                if (this.sensib >= this.event[this.fun_fact_counter].value) {
+                    this.alert = true
+                    this.fun_fact_counter++;
+                }
+            }
+        },
         sensibilisation() {
             this.sensib += this.sensib_auto;
         }
-    },
-    mounted: function () {
-        this.timer = setInterval(() => {
-            this.sensib += (this.sensib_auto / 10);
-        }, 100)
     }
 
 }
@@ -161,6 +211,46 @@ html {
     width: 100%;
     margin: 0;
     padding: 0;
+}
+
+.alertWrap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.66);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alert {
+    width: 33vw;
+    height: 50vh;
+    background: white;
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.alert h3 {
+    margin-top: 10%;
+}
+
+.alert p {
+    margin: 5%;
+}
+
+.button {
+    background-color: #5865F2;
+    width: 40%;
+    height: 10%;
+    border-radius: 20px;
+    margin-bottom: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    color: #FFF;
 }
 
 .game {
