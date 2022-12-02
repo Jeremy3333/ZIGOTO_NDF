@@ -6,10 +6,6 @@
                 <h2>La sensibilisation : le jeux !</h2> <img class="next" :src="require('../assets/img/next.svg')"
                     alt="">
             </router-link>
-            <router-link to="#" class="box btn-2">
-                <h2>Où se dépister ? Se protéger ?</h2> <img class="next" :src="require('../assets/img/next.svg')"
-                    alt="">
-            </router-link>
             <router-link to="/mauche" class="box btn-3">
                 <h2>La sensibilisation façon jeune</h2> <img class="next" :src="require('../assets/img/next.svg')"
                     alt="">
